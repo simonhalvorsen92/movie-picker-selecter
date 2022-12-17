@@ -5,3 +5,8 @@ export default interface Users {
   email: string;
   password: string;
 }
+
+export interface UsersLogin {
+  email: string;
+  password: string;
+}

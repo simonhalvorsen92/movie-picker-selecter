@@ -107,20 +107,6 @@
       "lastName": "hej",
       "email": "hej",
       "password": "hej"
-    },
-    {
-      "id": 17,
-      "firstName": "Simon",
-      "lastName": "Halvorsen",
-      "email": "simon.halvorsen1@gmail.com",
-      "password": "111"
-    },
-    {
-      "id": 18,
-      "firstName": "1",
-      "lastName": "1",
-      "email": "1",
-      "password": "1"
     }
   ],
   "users-login": [

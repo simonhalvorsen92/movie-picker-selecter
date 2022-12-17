@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
-import Users from "../../models/Users";
+import Users, { UsersLogin } from "../../models/Users";
 
 const Register = () => {
   const [users, setUsers] = useState<Users>({
@@ -49,6 +49,26 @@ const Register = () => {
       ...users,
       [e.target.name]: e.target.value,
     });
+  };
+  const [userLogin, setUserLogin] = useState<UsersLogin>({
+    email: "",
+    password: "",
+  });
+  const handleTextFeald = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
+  };
+  const handleSubmit2 = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (
+      users.email &&
+      users.password === userLogin.email &&
+      userLogin.password
+    ) {
+      console.log("det matchade med varandra");
+      alert("du är nu inloggad");
+    } else {
+      console.log("det matchade ej");
+    }
   };
 
   return (
@@ -153,6 +173,78 @@ const Register = () => {
           </Box>
         </Box>
       </Container>
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit2}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                onChange={handleTextFeald}
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={handleTextFeald}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                // href="UserVy"
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link variant="body2">Forgot password?</Link>
+                </Grid>
+                <Grid item>
+                  <Link href="Register" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
     </ThemeProvider>
   );
 };

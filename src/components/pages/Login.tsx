@@ -12,17 +12,60 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState } from "react";
+import Users, { UsersLogin } from "../../models/Users";
 
 const Login = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   });
+  // };
+
+  const [users, setUsers] = useState<Users>({
+    id: 0,
+    firstName: "",
+
+    lastName: "",
+
+    email: "",
+
+    password: "",
+  });
+  const [userLogin, setUserLogin] = useState<UsersLogin>({
+    email: "",
+    password: "",
+  });
   const theme = createTheme();
+  const handleTextFeald = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    fetch(" http://localhost:3001/users-login", {
+      method: "Post",
+      body: JSON.stringify({
+        email: userLogin.email,
+        password: userLogin.password,
+      }),
+    })
+      .then((response) => response.json())
+
+      .then((result) => {
+        console.log("vad får jag från login fetchen: result", result);
+
+        if (result.message === "SUCCESS") {
+          alert("you ar loged in");
+          // this.goToMain();
+        } else {
+          alert("Pleace check your login information");
+        }
+      });
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,6 +99,7 @@ const Login = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={handleTextFeald}
               autoFocus
             />
             <TextField
@@ -67,6 +111,7 @@ const Login = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleTextFeald}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -77,17 +122,16 @@ const Login = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              // href="UserVy"
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+                <Link variant="body2">Forgot password?</Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="Register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
