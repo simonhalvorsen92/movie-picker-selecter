@@ -50,26 +50,26 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const [userLogin, setUserLogin] = useState<UsersLogin>({
-    email: "",
-    password: "",
-  });
-  const handleTextFeald = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
-  };
-  const handleSubmit2 = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (
-      users.email &&
-      users.password === userLogin.email &&
-      userLogin.password
-    ) {
-      console.log("det matchade med varandra");
-      alert("du är nu inloggad");
-    } else {
-      console.log("det matchade ej");
-    }
-  };
+  // const [userLogin, setUserLogin] = useState<UsersLogin>({
+  //   email: "",
+  //   password: "",
+  // });
+  // const handleTextFeald = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  //   setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
+  // };
+  // const handleSubmit2 = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   if (
+  //     users.email &&
+  //     users.password === userLogin.email &&
+  //     userLogin.password
+  //   ) {
+  //     console.log("det matchade med varandra");
+  //     alert("du är nu inloggad");
+  //   } else {
+  //     alert("det matchade ej");
+  //   }
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -160,6 +160,7 @@ const Register = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              href="Login"
             >
               Sign Up
             </Button>
@@ -173,7 +174,7 @@ const Register = () => {
           </Box>
         </Box>
       </Container>
-      <ThemeProvider theme={theme}>
+      {/* <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
@@ -244,7 +245,7 @@ const Register = () => {
             </Box>
           </Box>
         </Container>
-      </ThemeProvider>
+      </ThemeProvider> */}
     </ThemeProvider>
   );
 };
