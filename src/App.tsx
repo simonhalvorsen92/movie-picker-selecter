@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Start from "./components/pages/Start";
+import Home from "./components/pages/Home";
 
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
@@ -16,8 +16,8 @@ function App() {
       <BrowserRouter>
         {/* <Route path="/" element={<Layout></Layout>}></Route> */}
         <Routes>
-          <Route path="/" element={<Layout></Layout>}>
-            <Route index element={<Start />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
             <Route path="Registrera" element={<Register />} />
             <Route path="Login" element={<Login />} />
             <Route path="Min lista" element={<UserVy />} />
