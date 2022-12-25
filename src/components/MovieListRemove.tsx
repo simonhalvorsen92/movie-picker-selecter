@@ -1,3 +1,4 @@
+import { Card, Grid, Rating } from "@mui/material";
 import Movies from "../models/Movies";
 import RemoveOneFromList from "./RemoveOneFromList";
 
@@ -14,11 +15,29 @@ const MovieListRemove = (props: IMovies) => {
   return (
     <>
       {props.usersList.map((movie, index) => (
-        <div key={movie.imdbID} onClick={() => props.onClickAddOrRemove(movie)}>
-          <img src={movie.Poster} alt="movies for the first page"></img>
-
-          <RemoveOneFromList />
-        </div>
+        <Grid marginBottom={"5px"}>
+          <Card
+            sx={{
+              marginLeft: "5px",
+              marginRight: "5px",
+            }}
+            key={movie.imdbID}
+          >
+            <img
+              height={"300px"}
+              width={"200px"}
+              src={movie.Poster}
+              alt={movie.Title}
+            ></img>
+          </Card>
+          <Grid
+            onClick={() => props.onClickAddOrRemove(movie)}
+            marginLeft={"5px"}
+            marginRight={"5px"}
+          >
+            <RemoveOneFromList />
+          </Grid>
+        </Grid>
       ))}
     </>
   );

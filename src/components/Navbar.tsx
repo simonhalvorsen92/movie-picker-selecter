@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 
-const pages = ["Registrera", "Login", "Min lista"];
+const pages = ["Registrera", "Login", "Sök", "Min Lista", "Rated Filmer"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navbar = () => {

@@ -9,6 +9,8 @@ import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 import { Layout } from "./components/Layout";
 import UserVy from "./components/pages/UserVy";
+import UsersList from "./components/pages/UsersList";
+import UsersRatedList from "./components/pages/UsersRatedList";
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
             <Route index element={<Home />} />
             <Route path="Registrera" element={<Register />} />
             <Route path="Login" element={<Login />} />
-            <Route path="Min lista" element={<UserVy />} />
+            <Route path="Sök" element={<UserVy />} />
+            <Route path="Min lista" element={<UsersList />} />
+            <Route path="Rated Filmer" element={<UsersRatedList />} />
           </Route>
         </Routes>
       </BrowserRouter>

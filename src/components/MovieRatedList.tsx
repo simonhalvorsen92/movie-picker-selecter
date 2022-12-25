@@ -1,11 +1,11 @@
 import { Card, Grid } from "@mui/material";
 import Movies from "../models/Movies";
-import AddOneToList from "./AddOneToList";
+import AddOneForRating from "./AddOneForRating";
 
 interface IMovies {
   usersList: Movies[];
 
-  AddOrRemoveFromList: React.ComponentPropsWithRef<typeof AddOneToList>;
+  AddOrRemoveFromList: React.ComponentPropsWithRef<typeof AddOneForRating>;
 
   onClickAddOrRemove: (movie: Movies) => void;
 }
@@ -16,26 +16,12 @@ const MovieAddList = (props: IMovies) => {
     <>
       {props.usersList.map((movie, index) => (
         <Grid marginBottom={"5px"}>
-          <Card
-            sx={{
-              marginLeft: "5px",
-              marginRight: "5px",
-            }}
-            key={movie.imdbID}
-          >
-            <img
-              height={"300px"}
-              width={"200px"}
-              src={movie.Poster}
-              alt={movie.Title}
-            ></img>
-          </Card>
           <Grid
             onClick={() => props.onClickAddOrRemove(movie)}
             marginLeft={"5px"}
             marginRight={"5px"}
           >
-            <AddOneToList />
+            <AddOneForRating />
           </Grid>
         </Grid>
       ))}

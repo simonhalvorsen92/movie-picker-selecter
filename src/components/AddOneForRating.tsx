@@ -1,12 +1,12 @@
 import { Button, Grid } from "@mui/material";
 
-const AddOneToList = () => {
+const AddOneForRating = () => {
   return (
     <>
       <Grid marginBottom={"10px"}>
         <Button
           sx={{
-            backgroundColor: "gold",
+            backgroundColor: "red",
             padding: " 5px 15px",
             cursor: "pointer",
             outline: "none",
@@ -14,14 +14,14 @@ const AddOneToList = () => {
             borderRadius: "5px",
             boxShadow: "0 5px #999",
             width: "200px",
-            color: "black",
+            color: "white",
           }}
         >
-          <span>Lägg till i lista</span>
+          <span>Rate Movie</span>
         </Button>
       </Grid>
     </>
   );
 };
 
-export default AddOneToList;
+export default AddOneForRating;

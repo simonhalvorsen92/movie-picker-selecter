@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import Movies from "../../models/Movies";
-import AddOneToList from "../AddOneToList";
-import MovieListAdd from "../MovieListAdd";
+
 import MovieListTitle from "../MovieListTitle";
-import SearchBox from "../SearchBox";
 
+import RemoveOneFromList from "../RemoveOneFromList";
+import MovieListRemove from "../MovieListRemove";
 import { Grid } from "@mui/material";
-
-const UserVy = () => {
+import MovieRatedList from "../MovieRatedList";
+import AddOneForRating from "../AddOneForRating";
+import Rating from "@mui/material/Rating";
+const UsersList = () => {
   const [usersList, setUsersList] = useState<Movies[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [usersWatchList, setUsersWatchList] = useState<Movies[]>([]);
@@ -34,48 +36,46 @@ const UserVy = () => {
   const saveToLocalstorage = (items: object) => {
     localStorage.setItem("react-movie-app-my-list", JSON.stringify(items));
   };
+  const rateMovie = (movie: Movies) => {
+    const newRateMovie = usersWatchList.filter(
+      (usersWatchList) => usersWatchList.imdbID === movie.imdbID
+    );
+    setUsersWatchList(newRateMovie);
+    saveToLocalstorage(newRateMovie);
+  };
 
-  const addMovieToList = (movie: Movies) => {
-    const newMovieList = [...usersWatchList, movie];
+  const removeMovie = (movie: Movies) => {
+    const newMovieList = usersWatchList.filter(
+      (usersWatchList) => usersWatchList.imdbID !== movie.imdbID
+    );
     setUsersWatchList(newMovieList);
     saveToLocalstorage(newMovieList);
   };
-
-  // const removeMovie = (movie: Movies) => {
-  //   const newMovieList = usersWatchList.filter(
-  //     (usersWatchList) => usersWatchList.imdbID !== movie.imdbID
-  //   );
-  //   setUsersWatchList(newMovieList);
-  //   saveToLocalstorage(newMovieList);
-  // };
   return (
     <>
       <Grid>
-        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
         <Grid>
-          <MovieListTitle title={"Filmer"} />
-        </Grid>
-
-        <Grid container direction={"row"} justifyContent={"center"}>
-          <MovieListAdd
-            usersList={usersList}
-            onClickAddOrRemove={addMovieToList}
-            AddOrRemoveFromList={AddOneToList}
-          />
-        </Grid>
-        {/* <Grid>
           <MovieListTitle title={"Min Lista med filmer"} />
         </Grid>
-        <Grid>
+        <Grid container direction={"row"} justifyContent={"center"}>
           <MovieListRemove
             usersList={usersWatchList}
             onClickAddOrRemove={removeMovie}
             AddOrRemoveFromList={RemoveOneFromList}
           />
-        </Grid> */}
+        </Grid>
+
+        <Grid container direction={"row"} justifyContent={"center"}>
+          <MovieRatedList
+            usersList={usersWatchList}
+            onClickAddOrRemove={rateMovie}
+            AddOrRemoveFromList={AddOneForRating}
+          />
+        </Grid>
+        <Rating />
       </Grid>
     </>
   );
 };
 
-export default UserVy;
+export default UsersList;
