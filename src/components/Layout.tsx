@@ -1,9 +1,10 @@
+import { Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 export const Layout = () => {
   return (
     <>
-      <div className="layout-container">
+      <Grid>
         <header>
           <Navbar />
         </header>
@@ -11,7 +12,7 @@ export const Layout = () => {
         <main>
           <Outlet></Outlet>
         </main>
-      </div>
+      </Grid>
     </>
   );
 };
