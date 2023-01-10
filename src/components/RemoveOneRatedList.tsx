@@ -1,6 +1,6 @@
 import { Button, Grid } from "@mui/material";
 
-const AddOneForRating = () => {
+const RemoveOneFromList = () => {
   return (
     <>
       <Grid marginBottom={"10px"}>
@@ -17,11 +17,11 @@ const AddOneForRating = () => {
             color: "white",
           }}
         >
-          <span>Save</span>
+          <span>Ta bort</span>
         </Button>
       </Grid>
     </>
   );
 };
 
-export default AddOneForRating;
+export default RemoveOneFromList;

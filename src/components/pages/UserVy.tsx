@@ -51,11 +51,11 @@ const UserVy = () => {
   return (
     <>
       <Grid>
+        user vy
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
         <Grid>
           <MovieListTitle title={"Filmer"} />
         </Grid>
-
         <Grid container direction={"row"} justifyContent={"center"}>
           <MovieListAdd
             usersList={usersList}

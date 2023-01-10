@@ -8,7 +8,8 @@ import MovieListRemove from "../MovieListRemove";
 import { Grid } from "@mui/material";
 import MovieRatedList from "../MovieRatedList";
 import AddOneForRating from "../AddOneForRating";
-import Rating from "@mui/material/Rating";
+import Rating from "../Rating";
+
 const UsersList = () => {
   const [usersList, setUsersList] = useState<Movies[]>([]);
   const [searchValue, setSearchValue] = useState("");
@@ -36,13 +37,13 @@ const UsersList = () => {
   const saveToLocalstorage = (items: object) => {
     localStorage.setItem("react-movie-app-my-list", JSON.stringify(items));
   };
-  const rateMovie = (movie: Movies) => {
-    const newRateMovie = usersWatchList.filter(
-      (usersWatchList) => usersWatchList.imdbID === movie.imdbID
-    );
-    setUsersWatchList(newRateMovie);
-    saveToLocalstorage(newRateMovie);
-  };
+  // const rateMovie = (movie: Movies) => {
+  //   const newRateMovie = usersWatchList.filter(
+  //     (usersWatchList) => usersWatchList.imdbID === movie.imdbID
+  //   );
+  //   setUsersWatchList(newRateMovie);
+  //   saveToLocalstorage(newRateMovie);
+  // };
 
   const removeMovie = (movie: Movies) => {
     const newMovieList = usersWatchList.filter(
@@ -63,16 +64,17 @@ const UsersList = () => {
             onClickAddOrRemove={removeMovie}
             AddOrRemoveFromList={RemoveOneFromList}
           />
+          {/* <Rating /> */}
         </Grid>
 
-        <Grid container direction={"row"} justifyContent={"center"}>
+        {/* <Grid container direction={"row"} justifyContent={"center"}>
           <MovieRatedList
             usersList={usersWatchList}
             onClickAddOrRemove={rateMovie}
             AddOrRemoveFromList={AddOneForRating}
           />
-        </Grid>
-        <Rating />
+         <Rating />
+        </Grid> */}
       </Grid>
     </>
   );

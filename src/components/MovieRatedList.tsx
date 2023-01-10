@@ -1,26 +1,44 @@
 import { Card, Grid } from "@mui/material";
 import Movies from "../models/Movies";
+import MoviesRating from "../models/Rating";
 import AddOneForRating from "./AddOneForRating";
+import AddOneToList from "./AddOneToList";
+import Rating from "./Rating";
 
 interface IMovies {
-  usersList: Movies[];
+  usersListRating: MoviesRating[];
 
   AddOrRemoveFromList: React.ComponentPropsWithRef<typeof AddOneForRating>;
 
-  onClickAddOrRemove: (movie: Movies) => void;
+  onClickRateMovie: (movie: MoviesRating) => void;
 }
 
-const MovieAddList = (props: IMovies) => {
+const MovieRatedList = (props: IMovies) => {
   // const AddToList1 = props.AddToList
   return (
     <>
-      {props.usersList.map((movie, index) => (
+      {props.usersListRating.map((movie, index) => (
         <Grid marginBottom={"5px"}>
+          <Card
+            sx={{
+              marginLeft: "5px",
+              marginRight: "5px",
+            }}
+            key={movie.imdbID}
+          >
+            <img
+              height={"300px"}
+              width={"200px"}
+              src={movie.Poster}
+              alt={movie.Title}
+            ></img>
+          </Card>
           <Grid
-            onClick={() => props.onClickAddOrRemove(movie)}
+            onClick={() => props.onClickRateMovie(movie)}
             marginLeft={"5px"}
             marginRight={"5px"}
           >
+            <Rating />
             <AddOneForRating />
           </Grid>
         </Grid>
@@ -29,4 +47,4 @@ const MovieAddList = (props: IMovies) => {
   );
 };
 
-export default MovieAddList;
+export default MovieRatedList;

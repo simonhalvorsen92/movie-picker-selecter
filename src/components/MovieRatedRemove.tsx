@@ -40,7 +40,6 @@ const MovieListRemove = (props: IMovies) => {
           >
             <RemoveOneFromList />
           </Grid>
-          {/* <Rating /> */}
         </Grid>
       ))}
     </>
