@@ -9,6 +9,7 @@ import AddOneForRating from "../AddOneForRating";
 import MovieListRemove from "../MovieListRemove";
 import RemoveOneFromList from "../RemoveOneFromList";
 import MovieRatedRemove from "../MovieRatedRemove";
+import RemoveOneRatedList from "../RemoveOneRatedList";
 
 const UsersRatedList = () => {
   const [usersListRating, setUsersListRating] = useState<MoviesRating[]>([]);
@@ -77,9 +78,9 @@ const UsersRatedList = () => {
         </Grid>
         <Grid container direction={"row"} justifyContent={"center"}>
           <MovieRatedRemove
-            usersList={usersWatchListRating}
+            usersListRating={usersWatchListRating}
             onClickAddOrRemove={removeMovie}
-            AddOrRemoveFromList={RemoveOneFromList}
+            AddOrRemoveFromList={RemoveOneRatedList}
           />
         </Grid>
       </Grid>

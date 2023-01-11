@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 
 const pages = ["Registrera", "Login", "Sök", "Min Lista", "Rated Filmer"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -41,10 +42,12 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar sx={{ backgroundColor: "black" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <LocalMoviesIcon
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -60,7 +63,7 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            MOVIE PICKER
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -94,29 +97,31 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <Link to={`/${page}`}>{page}</Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <LocalMoviesIcon
+            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+          />
           <Typography
-            variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
+
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            MOVIE PICKER
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (

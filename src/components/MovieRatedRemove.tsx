@@ -1,23 +1,25 @@
 import { Card, Grid } from "@mui/material";
 import { useEffect } from "react";
 import Movies from "../models/Movies";
+import MoviesRating from "../models/Rating";
 import Rating from "./Rating";
 
 import RemoveOneFromList from "./RemoveOneFromList";
+import RemoveOneRatedList from "./RemoveOneRatedList";
 
 interface IMovies {
-  usersList: Movies[];
+  usersListRating: MoviesRating[];
 
-  AddOrRemoveFromList: React.ComponentPropsWithRef<typeof RemoveOneFromList>;
+  AddOrRemoveFromList: React.ComponentPropsWithRef<typeof RemoveOneRatedList>;
 
-  onClickAddOrRemove: (movie: Movies) => void;
+  onClickAddOrRemove: (movie: MoviesRating) => void;
 }
 
 const MovieListRemove = (props: IMovies) => {
   // const AddToList1 = props.AddToList
   return (
-    <>
-      {props.usersList.map((movie, index) => (
+    <Grid>
+      {props.usersListRating.map((movie, index) => (
         <Grid marginBottom={"5px"}>
           <Card
             sx={{
@@ -38,11 +40,11 @@ const MovieListRemove = (props: IMovies) => {
             marginLeft={"5px"}
             marginRight={"5px"}
           >
-            <RemoveOneFromList />
+            <RemoveOneRatedList />
           </Grid>
         </Grid>
       ))}
-    </>
+    </Grid>
   );
 };
 export default MovieListRemove;
