@@ -17,7 +17,7 @@ const UsersRatedList = () => {
   const [usersWatchListRating, setUsersWatchListRating] = useState<
     MoviesRating[]
   >([]);
-  const getMovieRequest = async (seachValue: any) => {
+  const getMovieRequest = async (seachValue: string) => {
     const url = `http://www.omdbapi.com/?s=${seachValue}&apikey=de9c0cdf`;
     const response = await fetch(url);
     const responseJson = await response.json();
@@ -27,6 +27,17 @@ const UsersRatedList = () => {
     }
   };
 
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     "react-movie-app-my-list-rating",
+  //     JSON.stringify(usersListRating)
+  //   );
+  // }, [usersListRating]);
+
+  // localStorage.setItem(
+  //   "react-movie-app-my-list-rating",
+  //   JSON.stringify(usersListRating)
+  // );
   useEffect(() => {
     getMovieRequest(searchValueRating);
   }, [searchValueRating]);
@@ -42,6 +53,7 @@ const UsersRatedList = () => {
       "react-movie-app-my-list-rating",
       JSON.stringify(items)
     );
+    console.log(items);
   };
   const removeMovie = (movie: MoviesRating) => {
     const newMovieList = usersWatchListRating.filter(

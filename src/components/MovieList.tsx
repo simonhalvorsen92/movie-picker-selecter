@@ -3,7 +3,7 @@ import Movies from "../models/Movies";
 import AddOneToList from "./AddOneToList";
 
 interface IMovies {
-  usersList: Movies[];
+  movies: Movies[];
 
   AddOrRemoveFromList: React.ComponentPropsWithRef<typeof AddOneToList>;
 
@@ -14,7 +14,7 @@ const MovieAddList = (props: IMovies) => {
   // const AddToList1 = props.AddToList
   return (
     <>
-      {props.usersList.map((movie, index) => (
+      {props.movies.map((movie, index) => (
         <Grid marginBottom={"5px"}>
           <Card
             sx={{

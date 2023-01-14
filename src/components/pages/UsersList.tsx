@@ -29,21 +29,25 @@ const UsersList = () => {
   }, [searchValue]);
   useEffect(() => {
     const movieListLocalStorage = JSON.parse(
-      localStorage.getItem("react-movie-app-my-list") || ""
+      localStorage.getItem("react-movie-app-my-favourites") || ""
     );
     setUsersWatchList(movieListLocalStorage);
   }, []);
 
   const saveToLocalstorage = (items: object) => {
-    localStorage.setItem("react-movie-app-my-list", JSON.stringify(items));
+    localStorage.setItem(
+      "react-movie-app-my-favourites",
+      JSON.stringify(items)
+    );
   };
-  // const rateMovie = (movie: Movies) => {
-  //   const newRateMovie = usersWatchList.filter(
-  //     (usersWatchList) => usersWatchList.imdbID === movie.imdbID
-  //   );
-  //   setUsersWatchList(newRateMovie);
-  //   saveToLocalstorage(newRateMovie);
-  // };
+
+  const rateMovie = (movie: Movies) => {
+    const newRateMovie = usersWatchList.filter(
+      (usersWatchList) => usersWatchList.imdbID === movie.imdbID
+    );
+    setUsersWatchList(newRateMovie);
+    saveToLocalstorage(newRateMovie);
+  };
 
   const removeMovie = (movie: Movies) => {
     const newMovieList = usersWatchList.filter(
@@ -51,6 +55,7 @@ const UsersList = () => {
     );
     setUsersWatchList(newMovieList);
     saveToLocalstorage(newMovieList);
+    console.log(newMovieList);
   };
   return (
     <>

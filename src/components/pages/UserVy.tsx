@@ -1,44 +1,63 @@
 import { useEffect, useState } from "react";
 import Movies from "../../models/Movies";
 import AddOneToList from "../AddOneToList";
-import MovieListAdd from "../MovieListAdd";
+import MovieListAdd from "../MovieList";
 import MovieListTitle from "../MovieListTitle";
 import SearchBox from "../SearchBox";
 
 import { Grid } from "@mui/material";
+import MovieList from "../MovieList";
 
 const UserVy = () => {
-  const [usersList, setUsersList] = useState<Movies[]>([]);
+  const [movies, setMovies] = useState<Movies[]>([]);
+  const [favourites, setFavourites] = useState<Movies[]>([]);
   const [searchValue, setSearchValue] = useState("");
-  const [usersWatchList, setUsersWatchList] = useState<Movies[]>([]);
+
   const getMovieRequest = async (seachValue: any) => {
     const url = `http://www.omdbapi.com/?s=${seachValue}&apikey=de9c0cdf`;
+
     const response = await fetch(url);
     const responseJson = await response.json();
+
     console.log("vad får vi för response", responseJson);
     if (responseJson.Search) {
-      setUsersList(responseJson.Search);
+      setMovies(responseJson.Search);
     }
   };
 
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     "react-movie-app-my-favourites",
+  //     JSON.stringify(movies)
+  //   );
+  // }, [movies]);
+
+  // localStorage.setItem("items", JSON.stringify(movies));
   useEffect(() => {
     getMovieRequest(searchValue);
   }, [searchValue]);
+
   useEffect(() => {
-    const movieListLocalStorage = JSON.parse(
-      localStorage.getItem("react-movie-app-my-list") || ""
+    const movieFavourites = JSON.parse(
+      localStorage.getItem("react-movie-app-my-favourites") || ""
     );
-    setUsersWatchList(movieListLocalStorage);
+
+    if (movieFavourites) {
+      setFavourites(movieFavourites);
+    }
   }, []);
 
-  const saveToLocalstorage = (items: object) => {
-    localStorage.setItem("react-movie-app-my-list", JSON.stringify(items));
+  const saveToLocalStorage = (items: object) => {
+    localStorage.setItem(
+      "react-movie-app-my-favourites",
+      JSON.stringify(items)
+    );
   };
 
-  const addMovieToList = (movie: Movies) => {
-    const newMovieList = [...usersWatchList, movie];
-    setUsersWatchList(newMovieList);
-    saveToLocalstorage(newMovieList);
+  const addFavouriteMovie = (movie: Movies) => {
+    const newFavouriteList = [...favourites, movie];
+    setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
 
   // const removeMovie = (movie: Movies) => {
@@ -57,9 +76,9 @@ const UserVy = () => {
           <MovieListTitle title={"Filmer"} />
         </Grid>
         <Grid container direction={"row"} justifyContent={"center"}>
-          <MovieListAdd
-            usersList={usersList}
-            onClickAddOrRemove={addMovieToList}
+          <MovieList
+            movies={movies}
+            onClickAddOrRemove={addFavouriteMovie}
             AddOrRemoveFromList={AddOneToList}
           />
         </Grid>
