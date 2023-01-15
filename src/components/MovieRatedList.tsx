@@ -1,8 +1,10 @@
 import { Card, Grid } from "@mui/material";
+import { useState } from "react";
 import Movies from "../models/Movies";
 import MoviesRating from "../models/Rating";
 import AddOneForRating from "./AddOneForRating";
 import AddOneToList from "./AddOneToList";
+import BasicRating from "./Rating";
 import Rating from "./Rating";
 
 interface IMovies {
@@ -14,7 +16,6 @@ interface IMovies {
 }
 
 const MovieRatedList = (props: IMovies) => {
-  // const AddToList1 = props.AddToList
   return (
     <>
       {props.usersListRating.map((movie, index) => (
@@ -33,12 +34,12 @@ const MovieRatedList = (props: IMovies) => {
               alt={movie.Title}
             ></img>
           </Card>
+
           <Grid
             onClick={() => props.onClickRateMovie(movie)}
             marginLeft={"5px"}
             marginRight={"5px"}
           >
-            <Rating />
             <AddOneForRating />
           </Grid>
         </Grid>

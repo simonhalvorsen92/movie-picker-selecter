@@ -10,6 +10,8 @@ import MovieListRemove from "../MovieListRemove";
 import RemoveOneFromList from "../RemoveOneFromList";
 import MovieRatedRemove from "../MovieRatedRemove";
 import RemoveOneRatedList from "../RemoveOneRatedList";
+import BasicRating from "../Rating";
+const LOCOL_STORAGES_KEY = "starSelected";
 
 const UsersRatedList = () => {
   const [usersListRating, setUsersListRating] = useState<MoviesRating[]>([]);
@@ -23,21 +25,13 @@ const UsersRatedList = () => {
     const responseJson = await response.json();
     console.log("vad får vi för response", responseJson);
     if (responseJson.Search) {
+      responseJson.Search.map((movie: MoviesRating) => {
+        return { ...movie, rating: 0 };
+      });
       setUsersListRating(responseJson.Search);
     }
   };
 
-  // useEffect(() => {
-  //   localStorage.setItem(
-  //     "react-movie-app-my-list-rating",
-  //     JSON.stringify(usersListRating)
-  //   );
-  // }, [usersListRating]);
-
-  // localStorage.setItem(
-  //   "react-movie-app-my-list-rating",
-  //   JSON.stringify(usersListRating)
-  // );
   useEffect(() => {
     getMovieRequest(searchValueRating);
   }, [searchValueRating]);
