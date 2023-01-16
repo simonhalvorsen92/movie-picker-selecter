@@ -6,3 +6,8 @@ export default interface MoviesRating {
   Type: string;
   Poster: string;
 }
+export interface MoviesRatingStars {
+  rating: number;
+
+  id: string;
+}

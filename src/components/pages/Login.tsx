@@ -14,59 +14,26 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import Users, { UsersLogin } from "../../models/Users";
-
-const Login = () => {
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get("email"),
-  //     password: data.get("password"),
-  //   });
-  // };
-
-  const [users, setUsers] = useState<Users>({
-    id: 0,
-    firstName: "",
-
-    lastName: "",
-
-    email: "",
-
-    password: "",
-  });
-  const [userLogin, setUserLogin] = useState<UsersLogin>({
-    email: "",
-    password: "",
-  });
+interface Props {
+  onSubmit: (username: string, password: string) => void;
+}
+const Login = ({ onSubmit }: Props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const theme = createTheme();
-  const handleTextFeald = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
-  };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    fetch(" http://localhost:3001/users-login", {
-      method: "Post",
-      body: JSON.stringify({
-        email: userLogin.email,
-        password: userLogin.password,
-      }),
-    })
-      .then((response) => response.json())
+    const storedUsername = localStorage.getItem("username");
+    const storedPassword = localStorage.getItem("password");
 
-      .then((result) => {
-        console.log("vad får jag från login fetchen: result", result);
-
-        if (result.message === "SUCCESS") {
-          alert("you ar loged in");
-          // this.goToMain();
-        } else {
-          alert("Pleace check your login information");
-        }
-      });
+    if (username === storedUsername && password === storedPassword) {
+      alert("Logged in successfully!");
+      onSubmit(username, password);
+    } else {
+      alert("Incorrect username or password.");
+    }
   };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -92,26 +59,28 @@ const Login = () => {
             sx={{ mt: 1 }}
           >
             <TextField
-              margin="normal"
+              autoComplete="given-name"
+              name="firstName"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              onChange={handleTextFeald}
               autoFocus
+              id="username"
+              label="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              margin="normal"
             />
             <TextField
-              margin="normal"
               required
               fullWidth
               name="password"
+              autoComplete="new-password"
+              id="password"
               label="Password"
               type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={handleTextFeald}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              margin="normal"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

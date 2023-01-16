@@ -24,6 +24,11 @@ const MovieListRemove = (props: IMovies) => {
   // );
   // <span>{`Your rating: ${ratingValue}`}</span>;
   // return (
+  const [ratedMovies, setRatedMovies] = useState<MoviesRating[]>([]);
+
+  const handleClickRateMovie = (movie: MoviesRating) => {
+    setRatedMovies([...ratedMovies, movie]);
+  };
 
   return (
     <>
@@ -43,12 +48,7 @@ const MovieListRemove = (props: IMovies) => {
               alt={movie.Title}
             ></img>
           </Card>
-          <BasicRating
-            movie={movie}
-            onClickRateMovie={function (rating: MoviesRating): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
+          <BasicRating movie={movie} onClickRateMovie={handleClickRateMovie} />
           {/* <span>{`Your rating: ${ratingValue}`}</span>; */}
           {/* <Rating defaultValue={ratingValue} /> */}
           <Grid

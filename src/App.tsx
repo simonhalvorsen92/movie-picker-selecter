@@ -13,6 +13,10 @@ import UsersList from "./components/pages/UsersList";
 import UsersRatedList from "./components/pages/UsersRatedList";
 
 function App() {
+  function handleLogin(username: string, password: string): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -20,8 +24,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="Registrera" element={<Register />} />
-            <Route path="Login" element={<Login />} />
+            <Route
+              path="Registrera"
+              element={<Register onSubmit={handleLogin} />}
+            />
+            <Route path="Login" element={<Login onSubmit={handleLogin} />} />
+
             <Route path="Sök" element={<UserVy />} />
             <Route path="Min lista" element={<UsersList />} />
             <Route path="Rated Filmer" element={<UsersRatedList />} />

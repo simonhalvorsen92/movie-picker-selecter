@@ -2,7 +2,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
-import MoviesRating from "../models/Rating";
+import MoviesRating, { MoviesRatingStars } from "../models/Rating";
+
 const LOCOL_STORAGES_KEY = "starSelected";
 interface Props {
   movie: MoviesRating;
@@ -19,21 +20,18 @@ export default function BasicRating({ movie }: Props) {
   // }, [value]);
 
   // localStorage.setItem("items", JSON.stringify(value));
+
   React.useEffect(() => {
-    const getValue = localStorage.getItem(LOCOL_STORAGES_KEY);
+    const getValue = localStorage.getItem(`rating-${movie.imdbID}`);
     if (getValue) {
-      const parseValue = JSON.parse(getValue);
-      if (parseValue && parseValue.value) {
-        setValue(Number(parseValue.value));
-      } else {
-        setValue(0);
-      }
+      setValue(Number(getValue));
     } else {
       setValue(0);
     }
   }, []);
+
   const saveToLocalstorage = (rating: number, movie: MoviesRating) => {
-    let moviesRated: MoviesRating[] = [];
+    let moviesRated: MoviesRatingStars[] = [];
     const getValue = localStorage.getItem(LOCOL_STORAGES_KEY);
     if (getValue) {
       const parseValue = JSON.parse(getValue);
@@ -42,9 +40,9 @@ export default function BasicRating({ movie }: Props) {
       }
     }
     // Add the movie and its rating to the array
-    moviesRated.push({ ...movie, rating: rating });
+    moviesRated.push({ id: movie.imdbID, rating: rating });
     // Save the array to localstorage
-    localStorage.setItem(LOCOL_STORAGES_KEY, JSON.stringify({ moviesRated }));
+    localStorage.setItem(`rating-${movie.imdbID}`, JSON.stringify(rating));
   };
 
   return (
