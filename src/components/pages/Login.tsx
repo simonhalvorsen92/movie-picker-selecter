@@ -24,14 +24,19 @@ const Login = ({ onSubmit }: Props) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const storedUsername = localStorage.getItem("username");
-    const storedPassword = localStorage.getItem("password");
-
-    if (username === storedUsername && password === storedPassword) {
-      alert("Logged in successfully!");
-      onSubmit(username, password);
-    } else {
-      alert("Incorrect username or password.");
+    const usersList = localStorage.getItem("usersList");
+    if (usersList) {
+      const users = JSON.parse(usersList);
+      const user = users.find(
+        (user: { username: string; password: string }) =>
+          user.username === username && user.password === password
+      );
+      if (user) {
+        alert("Logged in successfully!");
+        onSubmit(username, password);
+      } else {
+        alert("Incorrect username or password.");
+      }
     }
   };
   return (

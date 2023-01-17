@@ -26,16 +26,24 @@ const Register = ({ onSubmit }: Props) => {
   // localStorage.setItem("username", username);
   // localStorage.setItem("password", password);
   const handleSubmit = (e: React.FormEvent) => {
-    let user: Users[] = [];
     e.preventDefault();
-    // store the data in localstorage
     localStorage.setItem("username", username);
     localStorage.setItem("password", password);
-    onSubmit(username, password);
-    user.push({ username, password });
+    let currentUsers: Users[] = [];
+    const usersList = localStorage.getItem("usersList");
+    if (usersList) {
+      try {
+        currentUsers = JSON.parse(usersList);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    currentUsers.push({ username, password });
+    console.log("currentUsers before: ", currentUsers);
+    localStorage.setItem("usersList", JSON.stringify(currentUsers));
+    console.log("currentUsers after: ", currentUsers);
     onSubmit(username, password);
   };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
