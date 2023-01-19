@@ -3,16 +3,12 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 export const Layout = () => {
   return (
-    <>
+    <Grid color={"rebeccapurple"} sx={{ backgroundColor: "pink" }}>
+      <Navbar />
+
       <Grid>
-        <header>
-          <Navbar />
-        </header>
-        <section></section>
-        <main>
-          <Outlet></Outlet>
-        </main>
+        <Outlet></Outlet>
       </Grid>
-    </>
+    </Grid>
   );
 };

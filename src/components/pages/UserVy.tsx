@@ -69,12 +69,9 @@ const UserVy = () => {
   // };
   return (
     <>
-      <Grid>
-        user vy
+      <Grid width={"100%"} height={"100vh"}>
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-        <Grid>
-          <MovieListTitle title={"Filmer"} />
-        </Grid>
+        <Grid></Grid>
         <Grid container direction={"row"} justifyContent={"center"}>
           <MovieList
             movies={movies}

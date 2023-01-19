@@ -1,3 +1,4 @@
+import { makeStyles } from "@material-ui/core";
 import { Card, Grid } from "@mui/material";
 import { useState } from "react";
 import Movies from "../models/Movies";
@@ -14,12 +15,24 @@ interface IMovies {
 
   onClickRateMovie: (movie: MoviesRating) => void;
 }
-
+const useStyles = makeStyles({
+  card: {
+    transition: "transform 0.3s",
+    "&:hover": {
+      transform: "scale(1.05)",
+    },
+  },
+});
 const MovieRatedList = (props: IMovies) => {
+  const classes = useStyles();
   return (
     <>
       {props.usersListRating.map((movie, index) => (
-        <Grid marginBottom={"5px"}>
+        <Grid
+          className={classes.card}
+          justifyContent={"space-around"}
+          marginBottom={"50px"}
+        >
           <Card
             sx={{
               marginLeft: "5px",

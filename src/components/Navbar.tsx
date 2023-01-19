@@ -11,7 +11,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 
@@ -40,13 +39,21 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const linkStyle = {
+    margin: "1rem",
+    textDecoration: "none",
+    color: "pink",
+  };
   return (
     <AppBar sx={{ backgroundColor: "black" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LocalMoviesIcon
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            sx={{
+              color: "pink",
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+            }}
           />
           <Typography
             variant="h6"
@@ -59,21 +66,26 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "pink",
               textDecoration: "none",
             }}
           >
             MOVIE PICKER
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none", lg: "none" },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              style={linkStyle}
             >
               <MenuIcon />
             </IconButton>
@@ -104,9 +116,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <LocalMoviesIcon
-            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-          />
+
           <Typography
             noWrap
             component="a"
@@ -117,7 +127,7 @@ function Navbar() {
               flexGrow: 1,
               fontFamily: "monospace",
 
-              color: "inherit",
+              color: "pink",
               textDecoration: "none",
             }}
           >
@@ -128,42 +138,16 @@ function Navbar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "pink", display: "block" }}
               >
-                <Link to={`/${page}`}>{page}</Link>
+                <Link style={linkStyle} to={`/${page}`}>
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          <Box sx={{ flexGrow: 0 }}></Box>
         </Toolbar>
       </Container>
     </AppBar>

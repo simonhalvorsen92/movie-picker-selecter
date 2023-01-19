@@ -6,6 +6,7 @@ import RemoveOneRatedList from "./RemoveOneRatedList";
 import { useEffect, useState } from "react";
 import BasicRating from "./Rating";
 import Rating from "./Rating";
+import { makeStyles } from "@material-ui/core";
 
 const LOCOL_STORAGES_KEY = "starSelected";
 
@@ -16,14 +17,18 @@ interface IMovies {
 
   onClickAddOrRemove: (movie: MoviesRating) => void;
 }
+const useStyles = makeStyles({
+  card: {
+    transition: "transform 0.3s",
+    "&:hover": {
+      transform: "scale(1.05)",
+    },
+  },
+});
 
 const MovieListRemove = (props: IMovies) => {
-  // const ratingValue = localStorage.getItem(LOCOL_STORAGES_KEY,rat);
-  // const [rating, setRating] = useState(
-  //   Number(localStorage.getItem(LOCOL_STORAGES_KEY)) || 0
-  // );
-  // <span>{`Your rating: ${ratingValue}`}</span>;
-  // return (
+  const classes = useStyles();
+
   const [ratedMovies, setRatedMovies] = useState<MoviesRating[]>([]);
 
   const handleClickRateMovie = (movie: MoviesRating) => {
@@ -33,7 +38,11 @@ const MovieListRemove = (props: IMovies) => {
   return (
     <>
       {props.usersListRating.map((movie, index) => (
-        <Grid marginBottom={"5px"}>
+        <Grid
+          className={classes.card}
+          justifyContent={"space-around"}
+          margin={"10px"}
+        >
           <Card
             sx={{
               marginLeft: "5px",

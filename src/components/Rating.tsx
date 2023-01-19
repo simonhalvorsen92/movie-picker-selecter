@@ -49,9 +49,13 @@ export default function BasicRating({ movie }: Props) {
     <Box
       sx={{
         "& > legend": { mt: 2 },
+        marginTop: "20px",
+        backgroundColor: "white",
+        borderRadius: "5px",
+        marginBottom: "15px",
+        padding: "5px",
       }}
     >
-      <Typography component="legend">Controlled</Typography>
       <Rating
         name="simple-controlled"
         value={value}

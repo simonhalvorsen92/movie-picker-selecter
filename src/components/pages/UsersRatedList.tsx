@@ -63,14 +63,12 @@ const UsersRatedList = () => {
   };
   return (
     <>
-      <Grid>
+      <Grid width={"100%"} height={"100vh"}>
         <SearchBox
           searchValue={searchValueRating}
           setSearchValue={setSearchValueRating}
         />
-        <Grid>
-          <MovieListTitle title={"Filmer att ranka"} />
-        </Grid>
+
         <Grid container direction={"row"} justifyContent={"center"}>
           <MovieRatedList
             usersListRating={usersListRating}
@@ -80,7 +78,7 @@ const UsersRatedList = () => {
         </Grid>
 
         <Grid>
-          <MovieListTitle title={"Min Lista med betygastta filmer"} />
+          <MovieListTitle title={"Vad jag tycker om dessa filmer"} />
         </Grid>
         <Grid container direction={"row"} justifyContent={"center"}>
           <MovieRatedRemove

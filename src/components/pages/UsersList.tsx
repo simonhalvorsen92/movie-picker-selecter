@@ -59,7 +59,7 @@ const UsersList = () => {
   };
   return (
     <>
-      <Grid>
+      <Grid width={"100%"} height={"100vh"}>
         <Grid>
           <MovieListTitle title={"Min Lista med filmer"} />
         </Grid>
@@ -69,17 +69,7 @@ const UsersList = () => {
             onClickAddOrRemove={removeMovie}
             AddOrRemoveFromList={RemoveOneFromList}
           />
-          {/* <Rating /> */}
         </Grid>
-
-        {/* <Grid container direction={"row"} justifyContent={"center"}>
-          <MovieRatedList
-            usersList={usersWatchList}
-            onClickAddOrRemove={rateMovie}
-            AddOrRemoveFromList={AddOneForRating}
-          />
-         <Rating />
-        </Grid> */}
       </Grid>
     </>
   );
