@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
 import MoviesRating, { MoviesRatingStars } from "../models/Rating";
 
 const LOCOL_STORAGES_KEY = "starSelected";
@@ -39,9 +38,9 @@ export default function BasicRating({ movie }: Props) {
         moviesRated = parseValue.moviesRated;
       }
     }
-    // Add the movie and its rating to the array
+
     moviesRated.push({ id: movie.imdbID, rating: rating });
-    // Save the array to localstorage
+
     localStorage.setItem(`rating-${movie.imdbID}`, JSON.stringify(rating));
   };
 

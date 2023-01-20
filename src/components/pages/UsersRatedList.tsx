@@ -6,12 +6,9 @@ import SearchBox from "../SearchBox";
 import { Grid } from "@mui/material";
 import MovieRatedList from "../MovieRatedList";
 import AddOneForRating from "../AddOneForRating";
-import MovieListRemove from "../MovieListRemove";
-import RemoveOneFromList from "../RemoveOneFromList";
+
 import MovieRatedRemove from "../MovieRatedRemove";
 import RemoveOneRatedList from "../RemoveOneRatedList";
-import BasicRating from "../Rating";
-const LOCOL_STORAGES_KEY = "starSelected";
 
 const UsersRatedList = () => {
   const [usersListRating, setUsersListRating] = useState<MoviesRating[]>([]);
@@ -19,6 +16,7 @@ const UsersRatedList = () => {
   const [usersWatchListRating, setUsersWatchListRating] = useState<
     MoviesRating[]
   >([]);
+
   const getMovieRequest = async (seachValue: string) => {
     const url = `http://www.omdbapi.com/?s=${seachValue}&apikey=de9c0cdf`;
     const response = await fetch(url);

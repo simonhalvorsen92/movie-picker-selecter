@@ -3,12 +3,10 @@ import { Card, Grid } from "@mui/material";
 import MoviesRating from "../models/Rating";
 
 import RemoveOneRatedList from "./RemoveOneRatedList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BasicRating from "./Rating";
-import Rating from "./Rating";
-import { makeStyles } from "@material-ui/core";
 
-const LOCOL_STORAGES_KEY = "starSelected";
+import { makeStyles } from "@material-ui/core";
 
 interface IMovies {
   usersListRating: MoviesRating[];
@@ -58,8 +56,7 @@ const MovieListRemove = (props: IMovies) => {
             ></img>
           </Card>
           <BasicRating movie={movie} onClickRateMovie={handleClickRateMovie} />
-          {/* <span>{`Your rating: ${ratingValue}`}</span>; */}
-          {/* <Rating defaultValue={ratingValue} /> */}
+
           <Grid
             onClick={() => props.onClickAddOrRemove(movie)}
             marginLeft={"5px"}

@@ -1,5 +1,5 @@
 import { Search as MuiSearch } from "@material-ui/icons";
-import { InputBase, Paper } from "@material-ui/core";
+import { InputBase } from "@material-ui/core";
 import { Card, Grid } from "@mui/material";
 
 interface ISearchMovie {
