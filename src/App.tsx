@@ -8,7 +8,7 @@ import Home from "./components/pages/Home";
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 import { Layout } from "./components/Layout";
-import UserVy from "./components/pages/UserVy";
+import { UserVy } from "./components/pages/UserVy";
 import UsersList from "./components/pages/UsersList";
 import UsersRatedList from "./components/pages/UsersRatedList";
 

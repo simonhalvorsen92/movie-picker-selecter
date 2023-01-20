@@ -1,29 +1,25 @@
 import { useEffect, useState } from "react";
 import Movies from "../../models/Movies";
 import AddOneToList from "../AddOneToList";
-import MovieListAdd from "../MovieList";
-import MovieListTitle from "../MovieListTitle";
+
 import SearchBox from "../SearchBox";
 
 import { Grid } from "@mui/material";
 import MovieList from "../MovieList";
 
+async function getMovieRequest(seachValue: string, setMovies: Function) {
+  const url = `http://www.omdbapi.com/?s=${seachValue}&apikey=de9c0cdf`;
+  const response = await fetch(url);
+  const responseJson = await response.json();
+  if (responseJson.Search) {
+    setMovies(responseJson.Search);
+  }
+}
+
 const UserVy = () => {
   const [movies, setMovies] = useState<Movies[]>([]);
   const [favourites, setFavourites] = useState<Movies[]>([]);
   const [searchValue, setSearchValue] = useState("");
-
-  const getMovieRequest = async (seachValue: any) => {
-    const url = `http://www.omdbapi.com/?s=${seachValue}&apikey=de9c0cdf`;
-
-    const response = await fetch(url);
-    const responseJson = await response.json();
-
-    console.log("vad får vi för response", responseJson);
-    if (responseJson.Search) {
-      setMovies(responseJson.Search);
-    }
-  };
 
   // useEffect(() => {
   //   localStorage.setItem(
@@ -34,7 +30,7 @@ const UserVy = () => {
 
   // localStorage.setItem("items", JSON.stringify(movies));
   useEffect(() => {
-    getMovieRequest(searchValue);
+    getMovieRequest(searchValue, setMovies);
   }, [searchValue]);
 
   useEffect(() => {
@@ -60,13 +56,6 @@ const UserVy = () => {
     saveToLocalStorage(newFavouriteList);
   };
 
-  // const removeMovie = (movie: Movies) => {
-  //   const newMovieList = usersWatchList.filter(
-  //     (usersWatchList) => usersWatchList.imdbID !== movie.imdbID
-  //   );
-  //   setUsersWatchList(newMovieList);
-  //   saveToLocalstorage(newMovieList);
-  // };
   return (
     <>
       <Grid width={"100%"} height={"100vh"}>
@@ -79,19 +68,9 @@ const UserVy = () => {
             AddOrRemoveFromList={AddOneToList}
           />
         </Grid>
-        {/* <Grid>
-          <MovieListTitle title={"Min Lista med filmer"} />
-        </Grid>
-        <Grid>
-          <MovieListRemove
-            usersList={usersWatchList}
-            onClickAddOrRemove={removeMovie}
-            AddOrRemoveFromList={RemoveOneFromList}
-          />
-        </Grid> */}
       </Grid>
     </>
   );
 };
 
-export default UserVy;
+export { getMovieRequest, UserVy };
